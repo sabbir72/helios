@@ -1,0 +1,5 @@
+factory\BrowserFactory.class
+factory\BrowserFactory$1.class
+pages\LoginPage.class
+enums\Browsers.class
+pages\HomePage.class
