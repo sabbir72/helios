@@ -16,6 +16,9 @@ public class Product_buy extends Basepage {
     }
 
     private By productName = By.xpath("//a[@id='item_4_title_link']");
+    private By A_Card = By.xpath("//button[@id='add-to-cart']");
+    private By CardBox = By.xpath("//a[@class='shopping_cart_link']");
+    private By checkOut = By.xpath("//button[@id='checkout']");
 //    public By Product_Name= By.id("//a[@id='item_4_title_link']");
 //    public By Add_card= By.xpath("//button[@id='add-to-cart']");
 
@@ -37,12 +40,17 @@ public class Product_buy extends Basepage {
 //        driver.findElement(Product_Name).click();
 //    }
     public void Add_Card(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement addCard = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='add-to-cart']")));
-        addCard.click();
+        click(A_Card);
+        System.out.println("done");
+    }
+     public void cardBox(){
+        click(CardBox);
+        System.out.println("done");
     }
 
-
+   public void Checkout(){
+        click(checkOut);
+   }
     public void P_commind(){
        clickProductName();
         Add_Card();

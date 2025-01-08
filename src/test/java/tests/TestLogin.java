@@ -187,6 +187,9 @@ public class TestLogin {
         // Perform actions in Product_buy
 //        productBuy.product_Name();
         productBuy.clickProductName();
+        productBuy.Add_Card();
+        productBuy.cardBox();
+        productBuy.Checkout();
     }
 
     @AfterSuite
