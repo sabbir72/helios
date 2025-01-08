@@ -50,13 +50,15 @@ public class HomePage {
         this.driver = driver;
     }
 
+
+
     public String mainLogo() {
         return driver.findElement(By.className("app_logo")).getText();
     }
 
     public void clickMenu() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='bm-burger-button']")));
+        WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='react-burger-menu-btn']")));
         menuButton.click();
     }
 

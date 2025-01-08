@@ -63,6 +63,74 @@
 
 package tests;
 
+//import factory.BrowserFactory;
+//import enums.Browsers;
+//import org.openqa.selenium.WebDriver;
+//import org.testng.annotations.AfterSuite;
+//import org.testng.annotations.BeforeSuite;
+//import org.testng.annotations.Test;
+//import pages.HomePage;
+//import pages.LoginPage;
+//import pages.Product_buy;
+//
+//import static org.testng.Assert.assertEquals;
+//
+//public class TestLogin {
+//    private WebDriver driver;
+//    private LoginPage loginPage;
+//    private HomePage homePage;
+//    private Product_buy productBuy;
+//
+//
+//    @BeforeSuite
+//    public void setUp() {
+//        // Launch browser
+//        driver = BrowserFactory.launch(Browsers.CHROME);
+//
+//        // Navigate to the login page
+//        driver.get("https://www.saucedemo.com/");
+//
+//        // Initialize the LoginPage object
+//        loginPage = new LoginPage(driver);
+//
+//    }
+//
+//    @Test
+//    public void testLogin() throws InterruptedException {
+//        // Login to the application
+//        homePage = loginPage.login("standard_user", "secret_sauce");
+//
+//        // Verify that the main logo text is correct after login
+//        assertEquals(homePage.mainLogo(), "Swag Labs", "Main logo text mismatch!");
+//
+//    }
+//    @Test
+//    public void test_Logout() throws InterruptedException {
+//        // Click the menu button
+//        homePage.clickMenu();
+//        Thread.sleep(3000);
+//        // Logout from the application
+////        homePage.clickLogout();
+//    }
+//    @Test
+//    public void Product() throws InterruptedException {
+//        productBuy=new Product_buy(driver);
+//       productBuy.P_commind();
+//    }
+//
+//
+//
+//@Test
+//    @AfterSuite
+//    public void tearDown() {
+//        // Close the browser
+//        if (driver != null) {
+////            driver.quit();
+//        }
+//    }
+//}
+
+
 import factory.BrowserFactory;
 import enums.Browsers;
 import org.openqa.selenium.WebDriver;
@@ -71,6 +139,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
+import pages.Product_buy;
 
 import static org.testng.Assert.assertEquals;
 
@@ -78,6 +147,7 @@ public class TestLogin {
     private WebDriver driver;
     private LoginPage loginPage;
     private HomePage homePage;
+    private Product_buy productBuy;
 
     @BeforeSuite
     public void setUp() {
@@ -91,19 +161,32 @@ public class TestLogin {
         loginPage = new LoginPage(driver);
     }
 
-    @Test
-    public void testLoginAndLogout() throws InterruptedException {
+    @Test(priority = 1)
+    public void testLogin() {
         // Login to the application
         homePage = loginPage.login("standard_user", "secret_sauce");
 
         // Verify that the main logo text is correct after login
         assertEquals(homePage.mainLogo(), "Swag Labs", "Main logo text mismatch!");
+    }
 
+    @Test(priority =3 , dependsOnMethods = "testLogin")
+    public void testLogout() {
         // Click the menu button
-        homePage.clickManu();
-         Thread.sleep(3000);
+        homePage.clickMenu();
+
         // Logout from the application
-        homePage.clickLogout();
+//        homePage.clickLogout();
+    }
+
+    @Test(priority = 2, dependsOnMethods = "testLogin")
+    public void testProductBuy() {
+        // Initialize the Product_buy object
+        productBuy = new Product_buy(driver);
+
+        // Perform actions in Product_buy
+//        productBuy.product_Name();
+        productBuy.clickProductName();
     }
 
     @AfterSuite
