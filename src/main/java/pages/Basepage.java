@@ -24,10 +24,19 @@ public class Basepage {
         wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
     }
 
+    // Input text into a text field
+    public void enterText(By locator, String text) {
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        element.clear(); // Clear existing text if any
+        element.sendKeys(text); // Enter the provided text
+    }
+
+
     // Get text from element
     public String getText(By locator) {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).getText();
+       return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).getText();
     }
+
 
     // Get attribute value
     public String getAttribute(By locator, String attribute) {

@@ -61,7 +61,7 @@
 //
 
 
-package tests;
+
 
 //import factory.BrowserFactory;
 //import enums.Browsers;
@@ -130,7 +130,7 @@ package tests;
 //    }
 //}
 
-
+package tests;
 import factory.BrowserFactory;
 import enums.Browsers;
 import org.openqa.selenium.WebDriver;
@@ -139,15 +139,19 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
+import pages.MyInform;
 import pages.Product_buy;
 
 import static org.testng.Assert.assertEquals;
 
 public class TestLogin {
+
     private WebDriver driver;
+
     private LoginPage loginPage;
     private HomePage homePage;
     private Product_buy productBuy;
+    private MyInform myInform;
 
     @BeforeSuite
     public void setUp() {
@@ -167,7 +171,7 @@ public class TestLogin {
         homePage = loginPage.login("standard_user", "secret_sauce");
 
         // Verify that the main logo text is correct after login
-        assertEquals(homePage.mainLogo(), "Swag Labs", "Main logo text mismatch!");
+       assertEquals(homePage.mainLogo(), "Swag Labs", "Main logo text mismatch!");
     }
 
     @Test(priority =3 , dependsOnMethods = "testLogin")
@@ -177,6 +181,19 @@ public class TestLogin {
 
         // Logout from the application
 //        homePage.clickLogout();
+    }
+
+    @Test(priority =4 , dependsOnMethods = "testLogin")
+    public void AddInfo() throws InterruptedException {
+        myInform =new MyInform(driver);
+        myInform.firstName();
+        myInform.lastName();
+        myInform.zip();
+        myInform.continuBtn();
+        myInform.finishBtn();
+        String Text01 =myInform.textGet();
+//        System.out.println("Thank you for your order!"+ Text01);
+         assertEquals(Text01,"Thank you for your order!", "Order confirmation message mismatch!");
     }
 
     @Test(priority = 2, dependsOnMethods = "testLogin")
@@ -190,6 +207,7 @@ public class TestLogin {
         productBuy.Add_Card();
         productBuy.cardBox();
         productBuy.Checkout();
+
     }
 
     @AfterSuite

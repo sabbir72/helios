@@ -35,7 +35,7 @@ public class Product_buy extends Basepage {
         click(productName);
     }
 
-//somapti
+//somapto
 //    public void product_Name (){
 //        driver.findElement(Product_Name).click();
 //    }
