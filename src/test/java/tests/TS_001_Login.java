@@ -212,47 +212,95 @@
 //    }
 //}
 //================================================================v 3==========================================================
+//package tests;
+//
+//import factory.BrowserFactory;
+//import enums.Browsers;
+//import org.openqa.selenium.WebDriver;
+//import org.testng.annotations.AfterSuite;
+//import org.testng.annotations.BeforeSuite;
+//import org.testng.annotations.Test;
+//import pages.HomePage;
+//import pages.LoginPage;
+//
+//import static org.testng.Assert.assertEquals;
+//
+//public class TestLogin {
+//
+//    private WebDriver driver;
+//    private LoginPage loginPage;
+//    private HomePage homePage;
+//
+//    @BeforeSuite
+//    public void setUp() {
+//        driver = BrowserFactory.launch(Browsers.CHROME);
+//        driver.manage().window().maximize();
+//        driver.get("https://www.saucedemo.com/");
+//        loginPage = new LoginPage(driver);
+//    }
+//
+//    @Test(priority = 1)
+//    public void testLogin() {
+//        homePage = loginPage.login("standard_user", "secret_sauce");
+//        assertEquals(homePage.mainLogo(), "Swag Labs", "Main logo text mismatch!");
+//    }
+//
+//    public WebDriver getDriver() {
+//        return driver;
+//    }
+//
+//    @AfterSuite
+//    public void tearDown() {
+//        if (driver != null) {
+////            driver.quit();
+//        }
+//    }
+//}
+
+
 package tests;
 
-import factory.BrowserFactory;
-import enums.Browsers;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import com.aventstack.extentreports.ExtentTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
-
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
-public class TestLogin {
+public class TS_001_Login extends BaseTest {
+    private ExtentTest test;
 
-    private WebDriver driver;
+
     private LoginPage loginPage;
     private HomePage homePage;
 
-    @BeforeSuite
-    public void setUp() {
-        driver = BrowserFactory.launch(Browsers.CHROME);
-        driver.manage().window().maximize();
-        driver.get("https://www.saucedemo.com/");
-        loginPage = new LoginPage(driver);
+
+    @BeforeMethod
+    public void setUpTest() {
+        test = ExtentReportManager.createTest("TS_001_Login");
     }
+
 
     @Test(priority = 1)
-    public void testLogin() {
-        homePage = loginPage.login("standard_user", "secret_sauce");
-        assertEquals(homePage.mainLogo(), "Swag Labs", "Main logo text mismatch!");
-    }
-
-    public WebDriver getDriver() {
-        return driver;
-    }
-
-    @AfterSuite
-    public void tearDown() {
-        if (driver != null) {
-//            driver.quit();
+    public void TS_001_Login() {
+        loginPage = new LoginPage(driver);
+        homePage =new HomePage(driver);
+        try {
+            assertNotNull(homePage, "HomePage Object null!");
+            assertEquals(homePage.mainLogo(), "Swag Labs", "Missmach");
+            test.pass("Good Maching");
+        } catch (Exception e) {
+            test.fail("Test failed: " + e.getMessage());
         }
     }
+
+
+    @AfterMethod
+    public void tearDownTest() {
+        ExtentReportManager.flushReports();
+    }
+
 }
+

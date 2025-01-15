@@ -22,7 +22,6 @@ public class MyInform extends Basepage {
     public void firstName(){
         enterText(F_name, "sabbir");
     }
-
     public void lastName(){
        enterText(L_name, "ahamed");
     }

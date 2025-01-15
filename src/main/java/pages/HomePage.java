@@ -53,7 +53,7 @@ public class HomePage {
 
 
     public String mainLogo() {
-        return driver.findElement(By.className("app_logo")).getText();
+        return driver.findElement(By.xpath("//div[@class='app_logo']")).getText();
     }
 
     public void clickMenu() {

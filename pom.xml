@@ -55,6 +55,13 @@
                 <scope>test</scope>
             </dependency>
 
+            <dependency>
+                <groupId>com.aventstack</groupId>
+                <artifactId>extentreports</artifactId>
+                <version>5.0.9</version> <!-- সর্বশেষ সংস্করণ ব্যবহার করুন -->
+            </dependency>
+
+
             <!-- https://mvnrepository.com/artifact/junit/junit -->
             <dependency>
                 <groupId>junit</groupId>
